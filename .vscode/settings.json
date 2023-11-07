@@ -1,0 +1,14 @@
+{
+    "makefile.makePath": "C:\\msys64\\mingw64\\bin\\mingw32-make",
+    "makefile.makefilePath": "Makefile",
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "c:\\Users\\Pontu\\_Dev\\Nackademin\\C\\Inlamning1",
+            "binaryPath": "c:\\Users\\Pontu\\_Dev\\Nackademin\\C\\Inlamning1\\main.exe",
+            "binaryArgs": []
+        }
+    ],
+    "files.associations": {
+        "adminmenu.h": "c"
+    }
+}
