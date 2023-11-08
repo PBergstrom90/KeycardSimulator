@@ -53,7 +53,6 @@ void adminMenu(CARDLIST *cardList) {
     
     case 6: 
         printf("\nProgram closing...\n");
-        printf("Bye!\n");
         free(cardList);
         isRunning = false;
     break;

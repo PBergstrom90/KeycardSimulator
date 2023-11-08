@@ -3,7 +3,7 @@
 #include "card.h"
 #include "cardlist.h"
 
-void cardAccess(cardList) {
+void cardAccess(CARDLIST *cardList) {
 
     printf("This is a test!\n");
     // for (int i = 0; i < count; i++){

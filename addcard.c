@@ -10,6 +10,7 @@
 #include "cardlist.h"
 #include "adminmenu.h"
 
+
 void addCard(CARDLIST *cardList) {
 
     time_t current_time;
@@ -21,13 +22,21 @@ void addCard(CARDLIST *cardList) {
            time_info->tm_year + 1900, time_info->tm_mon + 1, time_info->tm_mday,
            time_info->tm_hour, time_info->tm_min);
             
-   /* if(cardList->count == 0){
-             CARDLIST cardList->list = (CARDLIST *)malloc(sizeof(CARDLIST));
-             cardList->count++;
-         } else {
-             cardList->count++;
-             cardList = (CARDLIST *)realloc(list, sizeof(CARDLIST) * cardList->count);
-         }
-             GetInput("\nEnter new Card-ID: ",cardList[count-1]->cardId, 20);
-    */
+    // Define a new CARD structure and populate it with user input.
+    CARD newCard;
+    GetInput("Enter new Card-ID: ", newCard.cardId, sizeof(newCard.cardId));
+    // Similar steps for accessGranted and timeStamp.
+    
+    // Resize the list to accommodate the new card.
+    cardList->list = realloc(cardList->list, (cardList->count + 1) * sizeof(CARD));
+    if (cardList->list == NULL) {
+        // Handle memory allocation error.
+        return;
+    }
+    
+    // Add the new card to the list and increment the count.
+    cardList->list[cardList->count] = newCard;
+    cardList->count++;
+
+    printf("Total amount of cards is: %d\n", cardList->count);
 }
