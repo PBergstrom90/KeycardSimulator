@@ -44,7 +44,7 @@ void PrintCard (const CARD *card){
 void listCard(const CARDLIST *cardList) {
 
 for (int i = 0; i < cardList->count;i++){
-     printf("\nCARD NR %d: \n", i+1);
+     printf("\t\n--- CARD NR %d --- \n", i+1);
      PrintCard(&(cardList->list[i]));
      }
 

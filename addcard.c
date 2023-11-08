@@ -23,7 +23,7 @@ void addCard(CARDLIST *cardList) {
             
     // Define a new CARD structure and populate it with user input.
     CARD newCard;
-    GetInput("Enter new Card-ID (4 digits): ", newCard.cardId, sizeof(newCard.cardId));
+    GetInput("\nEnter new Card-ID (4 digits): ", newCard.cardId, sizeof(newCard.cardId));
     
     // NEEDS TO FIX
     // Similar steps for accessGranted and timeStamp.
@@ -39,5 +39,6 @@ void addCard(CARDLIST *cardList) {
     cardList->list[cardList->count] = newCard;
     cardList->count++;
 
-    printf("Total amount of cards in the system: %d\n", cardList->count);
+    printf("\nCard added successfully.\n");
+    printf("\nTotal amount of cards in the system: %d\n", cardList->count);
 }
