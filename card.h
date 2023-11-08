@@ -1,5 +1,7 @@
 #include <stdio.h>
-#include <dos.h>
+#include <time.h>
+#include <stdlib.h>
+#include <stdbool.h>
 #include "safeinput.h"
 #ifndef __CARD_H
 #define __CARD_H

@@ -25,6 +25,7 @@ void adminMenu(CARDLIST *cardList) {
     int sel = 0;
     GetInputInt("Choose: ", &sel);
     switch(sel){
+    
     case 1: 
         printf("\n\t--- REMOTE DOOR ACCESS ---\n");
         remoteDoor();
