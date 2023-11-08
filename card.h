@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <time.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include "safeinput.h"
@@ -7,9 +6,9 @@
 #define __CARD_H
 
 typedef struct {
-    char cardId[20];
+    char cardId[10];
     bool accessGranted;
-    char timeStamp[40];
+    char timeStamp[20];
 
 } CARD;
 

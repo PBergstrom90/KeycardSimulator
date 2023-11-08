@@ -9,6 +9,7 @@
         }
     ],
     "files.associations": {
-        "adminmenu.h": "c"
+        "adminmenu.h": "c",
+        "remotedoor.h": "c"
     }
 }

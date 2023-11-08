@@ -7,9 +7,13 @@
 #include "safeinput.h"
 #include "card.h"
 #include "cardlist.h"
-#include "addcard.h"
+#include "cardaccess.h"
 #include "adminmenu.h"
+#include "addcard.h"
 #include "remotedoor.h"
+#include "listcard.h"
+#include "scancard.h"
+
 
 void adminMenu(CARDLIST *cardList) {
     
@@ -27,31 +31,37 @@ void adminMenu(CARDLIST *cardList) {
     switch(sel){
     
     case 1: 
+        // (OK)
         printf("\n\t--- REMOTE DOOR ACCESS ---\n");
         remoteDoor();
     break;
     
     case 2: 
+        // (OK)
         printf("\n\t--- LIST CARDS IN SYSTEM ---\n");
-        listCard(&cardList);
+        listCard(cardList);
     break;
     
     case 3:
+        // NEED ACCESS & TIMESTAMP
         printf("\n\t--- ADD NEW CARD ---\n");
-        addCard(&cardList);
+        addCard(cardList);
     break;
 
     case 4: 
+        // NOT DONE
         printf("\n\t--- ADD/REMOVE CARD ACCESS ---\n");
-        cardAccess(&cardList);
+        cardAccess(cardList);
     break; 
     
     case 5:
+        // NOT DONE
         printf("\n\t--- FAKE TEST SCAN CARD ---\n");
-        scanCard(&cardList);
+        scanCard(cardList);
     break;
     
     case 6: 
+        // (OK)
         printf("\nProgram closing...\n");
         free(cardList);
         isRunning = false;
