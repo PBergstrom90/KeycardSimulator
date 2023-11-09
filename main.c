@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <malloc.h>
-#include <conio.h>
 #include <time.h>
 #include "safeinput.h"
 #include "card.h"
@@ -14,6 +13,9 @@
 #include "listcard.h"
 #include "scancard.h"
 
+// Added function definition, to resolve warnings during compilation.
+void insertStartCards(CARDLIST *cardList);
+
 // Använd "return" för att komma ur en meny while-loop.
 // Anropa inte funktionen på nytt (stackoverflow).
 
@@ -22,9 +24,7 @@ int main (){
     CARDLIST cardList;
 
     insertStartCards(&cardList);
-
     adminMenu(&cardList);
-
     free(cardList.list);
     
     return 0;

@@ -4,6 +4,6 @@
 #ifndef __SCAN_CARD_H
 #define __SCAN_CARD_H
 
-void scanCard();
+void scanCard(CARDLIST *cardList);
 
 #endif

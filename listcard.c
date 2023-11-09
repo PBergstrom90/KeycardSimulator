@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <malloc.h>
-#include <conio.h>
 #include "safeinput.h"
 #include "card.h"
 #include "cardlist.h"
@@ -37,7 +36,7 @@ void insertStartCards(CARDLIST *cardList) {
 }
 
 void PrintCard (const CARD *card){
-    printf("Card ID: %s\nAccess Granted: %s\nTimestamp: %s\n\n",
+    printf("Card ID: %s\nAccess Granted: %s\nTimestamp: %s\n",
     card->cardId, card->accessGranted ? "Yes" : "No", card->timeStamp);
 }
 

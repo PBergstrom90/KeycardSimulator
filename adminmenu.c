@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <malloc.h>
-#include <conio.h>
 #include "safeinput.h"
 #include "card.h"
 #include "cardlist.h"
@@ -14,6 +13,8 @@
 #include "listcard.h"
 #include "scancard.h"
 
+// Added function definitions, to resolve warnings during compilation.
+void addCard(CARDLIST *cardList);
 
 void adminMenu(CARDLIST *cardList) {
     
@@ -43,7 +44,7 @@ void adminMenu(CARDLIST *cardList) {
     break;
     
     case 3:
-        // NEED ACCESS & TIMESTAMP
+        // (OK)
         printf("\n\t--- ADD NEW CARD ---\n");
         addCard(cardList);
     break;

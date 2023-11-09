@@ -2,6 +2,7 @@
 #include <string.h>
 #include <limits.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include "safeinput.h"
 
 
@@ -96,4 +97,32 @@ INPUT_RESULT GetInput(char* prompt, char* buff, int maxSize)
 	// Otherwise remove newline and give string back to caller.
 	buff[strlen(buff) - 1] = '\0';
 	return INPUT_RESULT_OK;
+}
+
+// Testing if the user wants an input to be true or false. In this case, accessGranted.
+bool GetBooleanInput(const char* prompt) {
+    char input[10]; // Adjusted size for "yes" or "no" input
+    while (1) {
+        printf("%s", prompt);
+        if (fgets(input, sizeof(input), stdin) == NULL) {
+            // Handle error or "end of life".
+            exit(EXIT_FAILURE);
+        }
+
+        // Remove newline character from input
+        input[strcspn(input, "\n")] = '\0';
+
+		// Convert the input to lowercase
+        for (int i = 0; input[i]; i++) {
+            input[i] = tolower(input[i]);
+        }
+
+        if (strcmp(input, "yes") == 0) {
+            return true;
+        } else if (strcmp(input, "no") == 0) {
+            return false;
+        } else {
+            printf("Invalid input. Please enter 'yes' or 'no'.\n");
+        }
+    }
 }

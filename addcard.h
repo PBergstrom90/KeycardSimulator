@@ -6,9 +6,9 @@
 #include "cardlist.h"
 #include "adminmenu.h"
 
-#ifndef __ADMIN_MENU_H
-#define __ADMIN_MENU_H
+#ifndef __ADD_CARD_H
+#define __ADD_CARD_H
 
-void addCard();
+void addCard(CARDLIST *cardList);
 
 #endif

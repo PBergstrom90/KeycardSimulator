@@ -9,7 +9,6 @@
 #include "cardlist.h"
 #include "adminmenu.h"
 
-
 void addCard(CARDLIST *cardList) {
 
     time_t current_time;
@@ -23,19 +22,29 @@ void addCard(CARDLIST *cardList) {
             
     // Define a new CARD structure and populate it with user input.
     CARD newCard;
-    GetInput("\nEnter new Card-ID (4 digits): ", newCard.cardId, sizeof(newCard.cardId));
+
+    // Using a do-while loop, to confirm that the user is actually only entering 4 characters.
+    do {
+        GetInput("\nEnter new Card-ID (4 digits): ", newCard.cardId, sizeof(newCard.cardId));
+        if (strlen(newCard.cardId) != 4) {
+            printf("\nERROR: Card-ID must be exactly 4 digits. Please try again.\n");
+        }
+    } while (strlen(newCard.cardId) != 4);
+
+    // Asks the user if the new card should have access or not.
+    newCard.accessGranted = GetBooleanInput("Should access be granted? (yes/no): ");
+
+    // Setting current timestamp.
+    strftime(newCard.timeStamp, sizeof(newCard.timeStamp), "%Y-%m-%d", time_info);
     
-    // NEEDS TO FIX
-    // Similar steps for accessGranted and timeStamp.
-    
-    // Resize the list to accommodate the new card.
+    // Resize the list with realloc to accommodate the new card.
     cardList->list = realloc(cardList->list, (cardList->count + 1) * sizeof(CARD));
     if (cardList->list == NULL) {
         // Handle memory allocation error.
         return;
     }
     
-    // Add the new card to the list and increment the count.
+    // Add the new card to the list and increment the total count.
     cardList->list[cardList->count] = newCard;
     cardList->count++;
 

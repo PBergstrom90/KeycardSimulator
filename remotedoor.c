@@ -1,6 +1,14 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include "remotedoor.h"
 #include "safeinput.h"
+
+    // Declaring a function for a timedelay, to let the door be open for 3 seconds.
+    void delay(unsigned int milliseconds) {
+    clock_t start_time = clock();
+    while (clock() < start_time + milliseconds * CLOCKS_PER_SEC / 1000);
+    }
 
     void remoteDoor() {
         
@@ -13,6 +21,7 @@
             printf("\033[1;32m"); 
             printf("GREEN\n"); 
             printf("\033[0m");
+            delay(3000);
 
         } else if (openDoor == 2){
             printf("\nDoor is locked...\n");
