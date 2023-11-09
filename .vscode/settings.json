@@ -12,6 +12,7 @@
         "adminmenu.h": "c",
         "remotedoor.h": "c",
         "card.h": "c",
-        "time.h": "c"
+        "time.h": "c",
+        "cardlist.h": "c"
     }
 }

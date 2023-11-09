@@ -47,7 +47,7 @@ void adminMenu(CARDLIST *cardList) {
     break;
 
     case 4: 
-        // NOT DONE
+        // (OK)
         printf("\n\t--- ADD/REMOVE CARD ACCESS ---\n");
         cardAccess(cardList);
     break; 
