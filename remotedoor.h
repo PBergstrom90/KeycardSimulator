@@ -6,6 +6,5 @@
 #define __REMOTE_DOOR_H
 
 void remoteDoor();
-void delay(unsigned int);
 
 #endif

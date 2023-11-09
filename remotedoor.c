@@ -21,7 +21,19 @@
             printf("\033[1;32m"); 
             printf("GREEN\n"); 
             printf("\033[0m");
-            delay(3000);
+            printf("\n- Countdown - \n");
+            printf("3...\n");
+            delay(1000);
+            printf("2...\n");
+            delay(1000);
+            printf("1...\n");
+            delay(1000);
+
+            printf("\nDoor is now locked.\n");
+            printf("Currently the lamp is: ");
+            printf("\033[1;31m"); 
+            printf("RED\n"); 
+            printf("\033[0m");
 
         } else if (openDoor == 2){
             printf("\nDoor is locked...\n");
