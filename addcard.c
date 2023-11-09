@@ -25,11 +25,11 @@ void addCard(CARDLIST *cardList) {
 
     // Using a do-while loop, to confirm that the user is actually only entering 4 characters.
     do {
-        GetInput("\nEnter new Card-ID (4 digits): ", newCard.cardId, sizeof(newCard.cardId));
-        if (strlen(newCard.cardId) != 4) {
+        GetInputInt("\nEnter new Card-ID (4 digits): ", &newCard.cardId);
+        if (newCard.cardId < 1000 || newCard.cardId > 9999) {
             printf("\nERROR: Card-ID must be exactly 4 digits. Please try again.\n");
         }
-    } while (strlen(newCard.cardId) != 4);
+    } while (newCard.cardId < 1000 || newCard.cardId > 9999);
 
     // Asks the user if the new card should have access or not.
     newCard.accessGranted = GetBooleanInput("Should access be granted? (yes/no): ");
@@ -48,6 +48,6 @@ void addCard(CARDLIST *cardList) {
     cardList->list[cardList->count] = newCard;
     cardList->count++;
 
-    printf("\nCard added successfully.\n");
+    printf("\nNew card added successfully.\n");
     printf("\nTotal amount of cards in the system: %d\n", cardList->count);
 }

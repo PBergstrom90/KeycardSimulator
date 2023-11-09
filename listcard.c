@@ -17,13 +17,13 @@ void insertStartCards(CARDLIST *cardList) {
     time_info = localtime(&current_time);
     
     CARD card1;
-    strcpy(card1.cardId, "1212");
+    card1.cardId = 1212;
     card1.accessGranted = true;
     snprintf(card1.timeStamp, sizeof(card1.timeStamp), "%d-%02d-%02d",
              time_info->tm_year + 1900, time_info->tm_mon + 1, time_info->tm_mday);
 
     CARD card2;
-    strcpy(card2.cardId, "1213");
+    card2.cardId = 1213;
     card2.accessGranted = false;
     struct tm* time_info2 = localtime(&current_time);
     snprintf(card2.timeStamp, sizeof(card2.timeStamp), "%d-%02d-%02d",
@@ -36,7 +36,7 @@ void insertStartCards(CARDLIST *cardList) {
 }
 
 void PrintCard (const CARD *card){
-    printf("Card ID: %s\nAccess Granted: %s\nTimestamp: %s\n",
+    printf("Card ID: %d\nAccess Granted: %s\nTimestamp: %s\n",
     card->cardId, card->accessGranted ? "Yes" : "No", card->timeStamp);
 }
 

@@ -6,7 +6,7 @@
 #define __CARD_H
 
 typedef struct {
-    char cardId[10];
+    int cardId;
     bool accessGranted;
     char timeStamp[20];
 
