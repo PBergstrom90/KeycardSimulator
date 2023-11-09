@@ -10,6 +10,22 @@
     while (clock() < start_time + milliseconds * CLOCKS_PER_SEC / 1000);
     }
 
+    // Green doorlight
+    void simulateGreenLamp() {
+    printf("Currently the lamp is: ");
+    printf("\033[1;32m");
+    printf("GREEN\n");
+    printf("\033[0m");
+}
+
+    // Red doorlight
+    void simulateRedLamp() {
+    printf("Currently the lamp is: ");
+    printf("\033[1;31m");
+    printf("RED\n");
+    printf("\033[0m");
+}
+
     void remoteDoor() {
         
         int openDoor = 0;
@@ -17,10 +33,7 @@
         GetInputInt("\nEnter: ", &openDoor);
         if(openDoor == 1){
             printf("\nDoor is opening...\n");
-            printf("Currently the lamp is: ");
-            printf("\033[1;32m"); 
-            printf("GREEN\n"); 
-            printf("\033[0m");
+            simulateGreenLamp();
             printf("\n- Countdown - \n");
             printf("3...\n");
             delay(1000);
@@ -30,17 +43,11 @@
             delay(1000);
 
             printf("\nDoor is now locked.\n");
-            printf("Currently the lamp is: ");
-            printf("\033[1;31m"); 
-            printf("RED\n"); 
-            printf("\033[0m");
+            simulateRedLamp();
 
         } else if (openDoor == 2){
             printf("\nDoor is locked...\n");
-            printf("Currently the lamp is: ");
-            printf("\033[1;31m"); 
-            printf("RED\n"); 
-            printf("\033[0m");
+            simulateRedLamp();
         } else {
             printf("\nAn error has occured. Please try again.\n");
         }

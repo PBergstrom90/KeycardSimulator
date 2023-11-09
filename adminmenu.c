@@ -22,7 +22,7 @@ void adminMenu(CARDLIST *cardList) {
     printf("2. List All Cards In System\n");
     printf("3. Add New Card\n");
     printf("4. Add/Remove Card Access\n");
-    printf("5. Fake Test Scan Card\n");
+    printf("5. Scan Card\n");
     printf("6. Exit\n");
     int sel = 0;
     GetInputInt("Choose: ", &sel);
@@ -53,8 +53,8 @@ void adminMenu(CARDLIST *cardList) {
     break; 
     
     case 5:
-        // NOT DONE
-        printf("\n\t--- FAKE TEST SCAN CARD ---\n");
+        // (OK)
+        printf("\n\t--- SCAN CARD ---\n");
         scanCard(cardList);
     break;
     
