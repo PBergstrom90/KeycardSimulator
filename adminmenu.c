@@ -13,9 +13,6 @@
 #include "listcard.h"
 #include "scancard.h"
 
-// Added function definitions, to resolve warnings during compilation.
-void addCard(CARDLIST *cardList);
-
 void adminMenu(CARDLIST *cardList) {
     
     bool isRunning = true;
