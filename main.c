@@ -15,9 +15,14 @@
 
 // Added function definition, to resolve warnings during compilation.
 void insertStartCards(CARDLIST *cardList);
+void listCardToFile(const CARDLIST *cardList, const char *filename);
 
 // Function to initialize and load the card list from file.
 void initializeCardList(CARDLIST *cardList) {
+    // Initialize the card list
+    cardList->list = NULL;
+    cardList->count = 0;
+    
     // Load the card list from a file.
     int loadResult = loadCardList("cardlist.txt", cardList);
 
@@ -26,7 +31,8 @@ void initializeCardList(CARDLIST *cardList) {
         // File doesn't exist, insert default cards and save.
         printf("\nNo existing card list found. Initializing with default cards...\n");
         insertStartCards(cardList);
-        saveCardList("cardlist.txt", cardList);
+        listCardToFile(cardList, "cardlist.txt");
+        //saveCardList("cardlist.txt", cardList);
     } else if (loadResult == 2){
         printf("\nCard list found.\nCard list loaded successfully.\n");
     } else {

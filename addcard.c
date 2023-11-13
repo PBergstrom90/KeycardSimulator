@@ -72,21 +72,23 @@ void addCard(CARDLIST *cardList) {
     cardList->list[cardList->count] = newCard;
     cardList->count++;
 
-     // Save the updated card list to the .DAT file.
-    FILE *file = fopen("cardlist.txt", "wb");
+     // Save the updated card list to the .txt file.
+    FILE *file = fopen("cardlist.txt", "a");
     if (file == NULL) {
         fprintf(stderr, "ERROR: Cannot open the file for writing.\n");
         free(cardList->list); // Free memory if file opening fails.
         return;
     }
 
-    size_t write_size = fwrite(cardList, sizeof(CARDLIST), 1, file);
+    for (int i = 0; i < cardList->count; i++) {
+    size_t write_size = fwrite(&(cardList->list[i]), sizeof(CARD), 1, file);
     if (write_size != 1) {
-        fprintf(stderr, "ERROR: Cannot write card list to file.\n");
+        fprintf(stderr, "ERROR: Cannot write card to file.\n");
         free(cardList->list); // Free memory if writing fails.
-    } else {
-        printf("\nNew card added successfully.\n");
-        printf("\nTotal amount of cards in the system: %d\n", cardList->count);
+        break;
     }
+}
+    printf("\nNew card added successfully.\n");
+    printf("\nTotal amount of cards in the system: %d\n", cardList->count);
     fclose(file);
 }

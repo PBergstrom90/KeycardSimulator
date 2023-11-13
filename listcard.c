@@ -37,6 +37,44 @@ void insertStartCards(CARDLIST *cardList) {
     cardList->count = 2;
 }
 
+void PrintCardToString(const CARD *card, char *output, size_t outputSize) {
+    // Check for NULL pointers or insufficient output buffer size
+    if (card == NULL || output == NULL || outputSize < 100) {
+        printf("ERROR: Invalid input or insufficient buffer size.\n");
+        return;
+    }
+
+    snprintf(output, outputSize,
+             "--- CARD NR %d ---\nCard ID: %d\nAccess Granted: %s\nTimestamp: %s\n",
+             card->cardId, card->accessGranted ? 1 : 0, card->timeStamp);
+}
+
+void listCardToFile(const CARDLIST *cardList, const char *filename) {
+    FILE *file = fopen(filename, "w");
+    if (file == NULL) {
+        perror("ERROR: Cannot open file for writing");
+        return;
+    }
+
+    // Print the header
+    fprintf(file, "--- CARD LIST ---\n");
+
+    // For every card in the list, use the PrintCardToString function.
+    for (int i = 0; i < cardList->count; i++) {
+        for (int i = 0; i < cardList->count; i++) {
+        char cardString[100];
+        PrintCardToString(&(cardList->list[i]), cardString, sizeof(cardString));
+        fprintf(file, "%s", cardString);
+        fprintf(file, "\n");  // Add a new line to separate each card entry
+}
+}
+
+    // Print the total count
+    fprintf(file, "\nTotal amount of cards in the system: %d\n", cardList->count);
+
+    fclose(file);
+}
+
 void PrintCard (const CARD *card){
     if (card == NULL) {
         printf("ERROR: Invalid card pointer.\n");
@@ -50,53 +88,14 @@ void PrintCard (const CARD *card){
     }
 }
 
-void listCard(const CARDLIST *cardList) {
+void listCard(const CARDLIST *cardList) { 
 
-FILE *file = fopen("cardlist.txt", "rb");
+// For every card in the list, use the PrintCard-function.
+for (int i = 0; i < cardList->count;i++){
+     printf("\t\n--- CARD NR %d --- \n", i+1);
+     PrintCard(&(cardList->list[i]));
+     }
 
-    if (file == NULL) {
-        fprintf(stderr, "ERROR: Cannot open the card list file for reading.\n");
-        return;
-    }
+    printf("\nTotal amount of cards in the system: %d\n", cardList->count);
 
-    // Read the count from the file
-    size_t read_size = fread(&(cardList->count), sizeof(int), 1, file);
-
-    if (read_size != 1) {
-        fprintf(stderr, "ERROR: Cannot read card count from file.\n");
-        fclose(file);
-        return;
-    }
-
-    // Allocate memory for the cardList based on the count
-    cardList->list = malloc(cardList->count * sizeof(CARD));
-
-    if (cardList->list == NULL) {
-        fprintf(stderr, "ERROR: Memory allocation failed.\n");
-        fclose(file);
-        return;
-    }
-
-    // Read the cards from the file
-    read_size = fread(cardList->list, sizeof(CARD), cardList->count, file);
-
-    if (read_size != cardList->count) {
-        fprintf(stderr, "ERROR: Cannot read card list from file.\n");
-        fclose(file);
-        free(cardList->list);  // Free the memory in case of an error
-        return;
-    }
-
-    fclose(file);
-
-    // For every card in the list, use the PrintCard-function.
-    for (int i = 0; i < cardList.count;i++){
-        printf("\t\n--- CARD NR %d --- \n", i+1);
-        PrintCard(&(cardList.list[i]));
-    }
-
-    printf("\nTotal amount of cards in the system: %d\n", cardList.count);
-
-    // Free the allocated memory for the list.
-    free(cardList.list);
 }
