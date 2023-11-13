@@ -10,7 +10,7 @@
     while (clock() < start_time + milliseconds * CLOCKS_PER_SEC / 1000);
     }
 
-    // Green doorlight
+    // Green doorlight, when the door is opening.
     void simulateGreenLamp() {
     printf("Currently the lamp is: ");
     printf("\033[1;32m");
@@ -18,7 +18,7 @@
     printf("\033[0m");
 }
 
-    // Red doorlight
+    // Red doorlight, when the door is locked.
     void simulateRedLamp() {
     printf("Currently the lamp is: ");
     printf("\033[1;31m");
@@ -49,6 +49,6 @@
             printf("\nDoor is locked...\n");
             simulateRedLamp();
         } else {
-            printf("\nAn error has occured. Please try again.\n");
+            printf("\nERROR: Enter '1' or '2'. Please try again.\n");
         }
     }

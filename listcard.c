@@ -11,6 +11,7 @@
 
 void insertStartCards(CARDLIST *cardList) {
     
+    // Initializing 2 default cards, presented at the beginning of the project.
     time_t current_time;
     struct tm* time_info;
     time(&current_time);
@@ -42,6 +43,7 @@ void PrintCard (const CARD *card){
 
 void listCard(const CARDLIST *cardList) {
 
+// For every card in the list, use the PrintCard-function.
 for (int i = 0; i < cardList->count;i++){
      printf("\t\n--- CARD NR %d --- \n", i+1);
      PrintCard(&(cardList->list[i]));

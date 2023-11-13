@@ -24,7 +24,7 @@ void scanCard(CARDLIST *cardList) {
         // Card ID found
         printf("Card ID %d found.\n", cardId);
         if (cardList->list[index].accessGranted) {
-            // Access is granted, simulate green lamp
+            // Access is granted, simulate a green lamp
             printf("Access: GRANTED.\n");
             printf("\nDoor is opening...\n");
             simulateGreenLamp();
@@ -46,7 +46,7 @@ void scanCard(CARDLIST *cardList) {
         }
     } else {
         // Card ID not found
-        printf("Card ID %d not found.\nAccess: DENIED.\n", cardId);
+        printf("ERROR: Card ID %d not found.\nAccess: DENIED.\n", cardId);
         printf("\nDoor is locked...\n");
         simulateRedLamp();
     }

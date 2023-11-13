@@ -9,27 +9,48 @@
 #include "cardlist.h"
 #include "adminmenu.h"
 
+// Function to get a valid 4-digit card ID.
+int getValidCardId() {
+    int cardId;
+    do {
+        GetInputInt("\nEnter new Card-ID (4 digits): ", &cardId);
+        if (cardId < 1000 || cardId > 9999) {
+            printf("\nERROR: Card-ID must be exactly 4 digits. Please try again.\n");
+        }
+    } while (cardId < 1000 || cardId > 9999);
+    return cardId;
+}
+
 void addCard(CARDLIST *cardList) {
 
+    // Showing the current time, that will be implemented as a timestamp in the newCard.
     time_t current_time;
     struct tm* time_info;
     time(&current_time);
     time_info = localtime(&current_time);
 
-    printf("\nSystem's current date and time: %d/%02d/%02d %02d:%02d\n",
-           time_info->tm_year + 1900, time_info->tm_mon + 1, time_info->tm_mday,
-           time_info->tm_hour, time_info->tm_min);
+    printf("\nSystem's current date: %d/%02d/%02d\n",
+           time_info->tm_year + 1900, time_info->tm_mon + 1, time_info->tm_mday);
             
-    // Define a new CARD structure and populate it with user input.
+    // Initiate a new Card struct.
     CARD newCard;
 
-    // Using a do-while loop, to confirm that the user is actually only entering 4 characters.
+    // Initiate a bool to check if the input cardid already exists.
+    bool idExists;
     do {
-        GetInputInt("\nEnter new Card-ID (4 digits): ", &newCard.cardId);
-        if (newCard.cardId < 1000 || newCard.cardId > 9999) {
-            printf("\nERROR: Card-ID must be exactly 4 digits. Please try again.\n");
+        // Use the function to get 4 valid ID-digits.
+        newCard.cardId = getValidCardId();
+
+        // Loop through the cardlist, to check if the input matches an already existing cardid.
+        idExists = false;
+        for (int i = 0; i < cardList->count; i++) {
+            if (cardList->list[i].cardId == newCard.cardId) {
+                idExists = true;
+                printf("\nERROR: Card-ID %d already exists. Please choose a different ID.\n", newCard.cardId);
+                break;
+            }
         }
-    } while (newCard.cardId < 1000 || newCard.cardId > 9999);
+    } while (idExists);
 
     // Asks the user if the new card should have access or not.
     newCard.accessGranted = GetBooleanInput("Should access be granted? (yes/no): ");

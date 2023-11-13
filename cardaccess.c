@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <ctype.h>
+#include <string.h>
 #include "safeinput.h"
 #include "card.h"
 #include "cardlist.h"
@@ -24,19 +26,25 @@ void cardAccess(CARDLIST *cardList) {
 
         // Ask for confirmation to modify access. 
         // Adding a do-while to make sure, that the correct value (y/n) has been entered.
-        char confirm;
+        char confirm[6];
         do {
-            GetInputChar("Do you want to modify access? (y/n): ", &confirm);
-        } while (confirm != 'y' && confirm != 'Y' && confirm != 'n' && confirm != 'N');
-
-        if (confirm == 'y' || confirm == 'Y') {
-            // Toggle the accessGranted value
-            cardList->list[index].accessGranted = !cardList->list[index].accessGranted;
-            printf("Access modified successfully.\nCard ID: %d\nAccess Granted: %s\n", cardList->list[index].cardId, cardList->list[index].accessGranted ? "Yes" : "No");
-        } else {
-            printf("Access not modified. Returning...\n");
-        }
+            GetInput("\nShould access be granted? (yes/no): ", confirm, sizeof(confirm));
+            // Convert the input to lowercase, for easy user input.
+            for (int i = 0; confirm[i]; i++) {
+                confirm[i] = tolower(confirm[i]);
+            }
+            if (strcmp(confirm, "yes") == 0) {
+                // Toggle the accessGranted value
+                cardList->list[index].accessGranted = true;
+                printf("\nAccess modified successfully.\nCard ID: %d\nAccess Granted: Yes\n", cardList->list[index].cardId);
+            } else if (strcmp(confirm, "no") == 0) {
+                cardList->list[index].accessGranted = false;
+                printf("\nAccess modified successfully.\nCard ID: %d\nAccess Granted: No\n", cardList->list[index].cardId);
+            } else {
+                printf("\nERROR: Invalid input. Please enter 'yes' or 'no'.\n");
+            }
+        } while (!(strcmp(confirm, "yes") == 0 || strcmp(confirm, "no") == 0));
     } else {
-        printf("Card ID not found. Please try again.\n");
+        printf("ERROR: Card ID not found. Please try again.\n");
     }
 }

@@ -16,9 +16,6 @@
 // Added function definition, to resolve warnings during compilation.
 void insertStartCards(CARDLIST *cardList);
 
-// Använd "return" för att komma ur en meny while-loop.
-// Anropa inte funktionen på nytt (stackoverflow).
-
 int main (){   
 
     CARDLIST cardList;

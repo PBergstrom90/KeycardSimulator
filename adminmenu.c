@@ -66,7 +66,7 @@ void adminMenu(CARDLIST *cardList) {
     break;
     
     default:
-        printf("\nWrong entry. Please try again.\n");
+        printf("\nERROR: Wrong entry. Please try again.\n");
     break; 
     }
 }
