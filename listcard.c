@@ -3,11 +3,11 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <malloc.h>
+#include "listcard.h"
 #include "safeinput.h"
 #include "card.h"
 #include "cardlist.h"
 #include "adminmenu.h"
-#include "listcard.h"
 
 void insertStartCards(CARDLIST *cardList) {
     

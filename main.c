@@ -9,19 +9,23 @@
 #include "cardlist.h"
 #include "adminmenu.h"
 #include "addcard.h"
-#include "remotedoor.h"
 #include "listcard.h"
-#include "scancard.h"
 
 // Added function definition, to resolve warnings during compilation.
 void insertStartCards(CARDLIST *cardList);
 
 int main (){   
 
+    // Initialize a list for saving and presenting, all saved keycards.
     CARDLIST cardList;
 
+    // Initialize 2 default keycards. Function presented in listcard.c.
     insertStartCards(&cardList);
+    
+    // Main Menu-function.
     adminMenu(&cardList);
+    
+    // Free up any used memory from the heap.
     free(cardList.list);
     
     return 0;

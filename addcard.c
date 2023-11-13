@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <malloc.h>
 #include <time.h>
+#include "addcard.h"
 #include "safeinput.h"
 #include "card.h"
 #include "cardlist.h"

@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <ctype.h>
 #include <string.h>
+#include "cardaccess.h"
 #include "safeinput.h"
 #include "card.h"
 #include "cardlist.h"

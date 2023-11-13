@@ -24,9 +24,9 @@ void adminMenu(CARDLIST *cardList) {
     printf("4. Add/Remove Card Access\n");
     printf("5. Scan Card\n");
     printf("6. Exit\n");
-    int sel = 0;
-    GetInputInt("Choose: ", &sel);
-    switch(sel){
+    int select = 0;
+    GetInputInt("Choose: ", &select);
+    switch(select){
     
     case 1: 
         // (OK)
@@ -61,7 +61,6 @@ void adminMenu(CARDLIST *cardList) {
     case 6: 
         // (OK)
         printf("\nProgram closing...\n");
-        free(cardList);
         isRunning = false;
     break;
     
