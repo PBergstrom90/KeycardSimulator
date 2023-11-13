@@ -9,6 +9,7 @@
 #include "card.h"
 #include "cardlist.h"
 #include "adminmenu.h"
+#include "fileio.h"
 
 // Function to get a valid 4-digit card ID.
 int getValidCardId() {
@@ -63,6 +64,7 @@ void addCard(CARDLIST *cardList) {
     cardList->list = realloc(cardList->list, (cardList->count + 1) * sizeof(CARD));
     if (cardList->list == NULL) {
         // Handle memory allocation error.
+        free(cardList->list);
         return;
     }
     
@@ -70,6 +72,21 @@ void addCard(CARDLIST *cardList) {
     cardList->list[cardList->count] = newCard;
     cardList->count++;
 
-    printf("\nNew card added successfully.\n");
-    printf("\nTotal amount of cards in the system: %d\n", cardList->count);
+     // Save the updated card list to the .DAT file.
+    FILE *file = fopen("cardlist.txt", "wb");
+    if (file == NULL) {
+        fprintf(stderr, "ERROR: Cannot open the file for writing.\n");
+        free(cardList->list); // Free memory if file opening fails.
+        return;
+    }
+
+    size_t write_size = fwrite(cardList, sizeof(CARDLIST), 1, file);
+    if (write_size != 1) {
+        fprintf(stderr, "ERROR: Cannot write card list to file.\n");
+        free(cardList->list); // Free memory if writing fails.
+    } else {
+        printf("\nNew card added successfully.\n");
+        printf("\nTotal amount of cards in the system: %d\n", cardList->count);
+    }
+    fclose(file);
 }

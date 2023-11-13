@@ -8,6 +8,7 @@
 #include "card.h"
 #include "cardlist.h"
 #include "adminmenu.h"
+#include "fileio.h"
 
 void insertStartCards(CARDLIST *cardList) {
     
@@ -37,18 +38,65 @@ void insertStartCards(CARDLIST *cardList) {
 }
 
 void PrintCard (const CARD *card){
+    if (card == NULL) {
+        printf("ERROR: Invalid card pointer.\n");
+        return;
+    }
+    if (card->timeStamp != NULL) {
     printf("Card ID: %d\nAccess Granted: %s\nTimestamp: %s\n",
     card->cardId, card->accessGranted ? "Yes" : "No", card->timeStamp);
+    } else {
+        printf("ERROR: Invalid timestamp pointer.\n");
+    }
 }
 
 void listCard(const CARDLIST *cardList) {
 
-// For every card in the list, use the PrintCard-function.
-for (int i = 0; i < cardList->count;i++){
-     printf("\t\n--- CARD NR %d --- \n", i+1);
-     PrintCard(&(cardList->list[i]));
-     }
+FILE *file = fopen("cardlist.txt", "rb");
 
-    printf("\nTotal amount of cards in the system: %d\n", cardList->count);
+    if (file == NULL) {
+        fprintf(stderr, "ERROR: Cannot open the card list file for reading.\n");
+        return;
+    }
 
+    // Read the count from the file
+    size_t read_size = fread(&(cardList->count), sizeof(int), 1, file);
+
+    if (read_size != 1) {
+        fprintf(stderr, "ERROR: Cannot read card count from file.\n");
+        fclose(file);
+        return;
+    }
+
+    // Allocate memory for the cardList based on the count
+    cardList->list = malloc(cardList->count * sizeof(CARD));
+
+    if (cardList->list == NULL) {
+        fprintf(stderr, "ERROR: Memory allocation failed.\n");
+        fclose(file);
+        return;
+    }
+
+    // Read the cards from the file
+    read_size = fread(cardList->list, sizeof(CARD), cardList->count, file);
+
+    if (read_size != cardList->count) {
+        fprintf(stderr, "ERROR: Cannot read card list from file.\n");
+        fclose(file);
+        free(cardList->list);  // Free the memory in case of an error
+        return;
+    }
+
+    fclose(file);
+
+    // For every card in the list, use the PrintCard-function.
+    for (int i = 0; i < cardList.count;i++){
+        printf("\t\n--- CARD NR %d --- \n", i+1);
+        PrintCard(&(cardList.list[i]));
+    }
+
+    printf("\nTotal amount of cards in the system: %d\n", cardList.count);
+
+    // Free the allocated memory for the list.
+    free(cardList.list);
 }
