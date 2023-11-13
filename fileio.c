@@ -53,14 +53,6 @@ int loadCardList(const char* filename, CARDLIST* cardList) {
     return 2;
 }
 
-
-
-
-
-
-
-
-
 int saveCardList(char* filename, const CARDLIST* cardList) {
     FILE* file = fopen(filename, "w");
     if (file == NULL) {

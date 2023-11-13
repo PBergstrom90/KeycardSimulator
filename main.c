@@ -30,9 +30,8 @@ void initializeCardList(CARDLIST *cardList) {
     if (loadResult == 1) {
         // File doesn't exist, insert default cards and save.
         printf("\nNo existing card list found. Initializing with default cards...\n");
+        // From listcard.c
         insertStartCards(cardList);
-        listCardToFile(cardList, "cardlist.txt");
-        //saveCardList("cardlist.txt", cardList);
     } else if (loadResult == 2){
         printf("\nCard list found.\nCard list loaded successfully.\n");
     } else {

@@ -3,7 +3,9 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <malloc.h>
+#include <time.h>
 #include "listcard.h"
+#include "addcard.h"
 #include "safeinput.h"
 #include "card.h"
 #include "cardlist.h"
@@ -35,44 +37,6 @@ void insertStartCards(CARDLIST *cardList) {
     cardList->list[0] = card1;
     cardList->list[1] = card2;
     cardList->count = 2;
-}
-
-void PrintCardToString(const CARD *card, char *output, size_t outputSize) {
-    // Check for NULL pointers or insufficient output buffer size
-    if (card == NULL || output == NULL || outputSize < 100) {
-        printf("ERROR: Invalid input or insufficient buffer size.\n");
-        return;
-    }
-
-    snprintf(output, outputSize,
-             "--- CARD NR %d ---\nCard ID: %d\nAccess Granted: %s\nTimestamp: %s\n",
-             card->cardId, card->accessGranted ? 1 : 0, card->timeStamp);
-}
-
-void listCardToFile(const CARDLIST *cardList, const char *filename) {
-    FILE *file = fopen(filename, "w");
-    if (file == NULL) {
-        perror("ERROR: Cannot open file for writing");
-        return;
-    }
-
-    // Print the header
-    fprintf(file, "--- CARD LIST ---\n");
-
-    // For every card in the list, use the PrintCardToString function.
-    for (int i = 0; i < cardList->count; i++) {
-        for (int i = 0; i < cardList->count; i++) {
-        char cardString[100];
-        PrintCardToString(&(cardList->list[i]), cardString, sizeof(cardString));
-        fprintf(file, "%s", cardString);
-        fprintf(file, "\n");  // Add a new line to separate each card entry
-}
-}
-
-    // Print the total count
-    fprintf(file, "\nTotal amount of cards in the system: %d\n", cardList->count);
-
-    fclose(file);
 }
 
 void PrintCard (const CARD *card){
