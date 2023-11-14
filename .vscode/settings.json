@@ -13,7 +13,8 @@
         "remotedoor.h": "c",
         "card.h": "c",
         "time.h": "c",
-        "cardlist.h": "c"
+        "cardlist.h": "c",
+        "limits.h": "c"
     }
 }
 // hello
