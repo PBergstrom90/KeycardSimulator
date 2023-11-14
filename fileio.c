@@ -26,17 +26,17 @@ int loadCardList(const char* filename, CARDLIST* cardList) {
             CARD card;
             // Read the next three lines for card ID, access granted, and timestamp
             if (fgets(line, sizeof(line), file) != NULL) {
-                printf("Card ID line: %s", line);  // Debugging line
+                // printf("Card ID line: %s", line);  // Debugging line
                 sscanf(line, "Card ID: %d", card.cardId);
             }
             if (fgets(line, sizeof(line), file) != NULL) {
-                printf("Access Granted line: %s", line);  // Debugging line
+                // printf("Access Granted line: %s", line);  // Debugging line
                 sscanf(line, "Access Granted: %s", accessGrantedStr);
                 // Convert the accessGranted field to a boolean
                 card.accessGranted = (strcmp(accessGrantedStr, "Yes") == 0) ? true : false;
             }
             if (fgets(line, sizeof(line), file) != NULL) {
-                printf("Timestamp line: %s", line);  // Debugging line
+                // printf("Timestamp line: %s", line);  // Debugging line
                 // Read the timestamp until the end of the line
                 sscanf(line, "Timestamp: %[^\n]", card.timeStamp);
                 // Increment the card count and reallocate the list

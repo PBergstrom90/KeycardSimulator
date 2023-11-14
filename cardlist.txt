@@ -1,0 +1,16 @@
+--- CARD NR 1 ---
+Card ID: 1212
+Access Granted: Yes
+Timestamp: 2023-11-14
+--- CARD NR 2 ---
+Card ID: 1213
+Access Granted: No
+Timestamp: 2023-11-14
+--- CARD NR 3 ---
+Card ID: 1214
+Access Granted: Yes
+Timestamp: 2023-11-14
+--- CARD NR 4 ---
+Card ID: 1215
+Access Granted: No
+Timestamp: 2023-11-14

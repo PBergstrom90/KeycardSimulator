@@ -48,7 +48,7 @@ int main (){
 
     // Initialize and load the card list
     initializeCardList(&cardList);
-
+    
     // Main Menu-function.
     adminMenu(&cardList);
 
