@@ -25,7 +25,7 @@
     printf("RED\n");
     printf("\033[0m");
 }
-
+    // Simple function to simulate a remote door operation.
     void remoteDoor() {
         
         int openDoor = 0;

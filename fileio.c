@@ -41,7 +41,6 @@ int loadCardList(const char* filename, CARDLIST* cardList) {
             }
         }
     }
-
     fclose(file);
     // Return 2 to indicate success.
     return 2;

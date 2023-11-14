@@ -30,14 +30,14 @@ void addCard(CARDLIST *cardList) {
     struct tm* time_info;
     time(&current_time);
     time_info = localtime(&current_time);
-
     printf("\nSystem's current date: %d/%02d/%02d\n",
            time_info->tm_year + 1900, time_info->tm_mon + 1, time_info->tm_mday);
             
     // Initiate a new Card struct.
     CARD newCard;
-
-    // Initiate a bool to check if the input cardid already exists.
+    // Initiate a bool, the confirm that the new card was added successfully at the end.
+    bool success;
+    // Initiate a bool to check if the input CardID already exists.
     bool idExists;
     do {
         // Use the function to get 4 valid ID-digits.
@@ -54,10 +54,10 @@ void addCard(CARDLIST *cardList) {
         }
     } while (idExists);
 
-    // Asks the user if the new card should have access or not.
+    // Asks the user if the new card should have access granted or not.
     newCard.accessGranted = GetBooleanInput("Should access be granted? (yes/no): ");
 
-    // Setting current timestamp.
+    // Setting current system timestamp.
     strftime(newCard.timeStamp, sizeof(newCard.timeStamp), "%Y-%m-%d", time_info);
     
     // Resize the list with realloc to accommodate the new card.
@@ -65,6 +65,7 @@ void addCard(CARDLIST *cardList) {
     if (cardList->list == NULL) {
         // Handle memory allocation error.
         free(cardList->list);
+        success = false;
         return;
     }
     
@@ -72,23 +73,30 @@ void addCard(CARDLIST *cardList) {
     cardList->list[cardList->count] = newCard;
     cardList->count++;
 
-     // Save the updated card list to the .txt file.
+    // Save the updated card list to the .txt file.
     FILE *file = fopen("cardlist.txt", "a");
     if (file == NULL) {
         fprintf(stderr, "ERROR: Cannot open the file for writing.\n");
         free(cardList->list); // Free memory if file opening fails.
+        success = false;
         return;
     }
-
     for (int i = 0; i < cardList->count; i++) {
+    // Write the CARD info to the cardList.
     size_t write_size = fwrite(&(cardList->list[i]), sizeof(CARD), 1, file);
     if (write_size != 1) {
         fprintf(stderr, "ERROR: Cannot write card to file.\n");
         free(cardList->list); // Free memory if writing fails.
+        success = false;
         break;
     }
 }
+    if(success = true){
+    // Report success to the user.
     printf("\nNew card added successfully.\n");
     printf("\nTotal amount of cards in the system: %d\n", cardList->count);
+    } else if (success = false){
+        printf("\nERROR: Cannot add new card . Please try again.\n");
+    }
     fclose(file);
 }

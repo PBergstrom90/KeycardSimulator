@@ -6,6 +6,7 @@
 #include <ctype.h>
 #include "safeinput.h"
 
+// Functions to help with handling user inputs, throughout the program.
 
 bool parseLong(const char *str, long *val)
 {
@@ -20,9 +21,6 @@ bool parseLong(const char *str, long *val)
 
     return rc;
 }
-
-
-
 bool parseFloat(const char *str, float *val)
 {
     char *temp;
@@ -82,9 +80,7 @@ INPUT_RESULT GetInput(char* prompt, char* buff, int maxSize)
 	}
 	if (fgets(buff, maxSize, stdin) == NULL || (strlen(buff) == 1 && buff[0] == '\n'))
 		return INPUT_RESULT_NO_INPUT; 
-        
     
-
 	// If it was too long, there'll be no newline. In that case, we flush
 	// to end of line so that excess doesn't affect the next call.
 	if (buff[strlen(buff) - 1] != '\n') {
@@ -100,7 +96,7 @@ INPUT_RESULT GetInput(char* prompt, char* buff, int maxSize)
 	return INPUT_RESULT_OK;
 }
 
-// Testing if the user wants an input to be true or false. In this case, accessGranted.
+// Testing if the user wants an input to be true or false. Use case: accessGranted.
 bool GetBooleanInput(const char* prompt) {
     char input[10]; // Adjusted size for "yes" or "no" input
     while (1) {

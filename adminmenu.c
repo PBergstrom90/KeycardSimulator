@@ -29,42 +29,43 @@ void adminMenu(CARDLIST *cardList) {
     switch(select){
     
     case 1: 
-        // (OK)
+        // Simulating opening a locked door.
         printf("\n\t--- REMOTE DOOR ACCESS ---\n");
         remoteDoor();
     break;
     
     case 2: 
-        // (OK)
+        // List all the registered cards. 2 cards are added by default.
         printf("\n\t--- LIST CARDS IN SYSTEM ---\n");
         listCard(cardList);
     break;
     
     case 3:
-        // (OK)
+        // Let the user add a new card.
         printf("\n\t--- ADD NEW CARD ---\n");
         addCard(cardList);
     break;
 
     case 4: 
-        // (OK)
+        // Let the user modify specific card access.
         printf("\n\t--- ADD/REMOVE CARD ACCESS ---\n");
         cardAccess(cardList);
     break; 
     
     case 5:
-        // (OK)
+        // Use cardID from the register to simulate a doorscanner.
         printf("\n\t--- SCAN CARD ---\n");
         scanCard(cardList);
     break;
     
     case 6: 
-        // (OK)
+        // Exit the program.
         printf("\nProgram closing...\n");
         isRunning = false;
     break;
     
     default:
+        // In case of input failure.
         printf("\nERROR: Wrong entry. Please try again.\n");
     break; 
     }

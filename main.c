@@ -17,22 +17,24 @@
 void insertStartCards(CARDLIST *cardList);
 void listCardToFile(const CARDLIST *cardList, const char *filename);
 
-// Function to initialize and load the card list from file.
+// First function of the program. 
+// To initialize and load the card list from a textfile.
 void initializeCardList(CARDLIST *cardList) {
     // Initialize the card list
     cardList->list = NULL;
     cardList->count = 0;
     
-// In initializeCardList function
+// Function for loading the textfile. Function from fileio.c.
 int loadResult = loadCardList("cardlist.txt", cardList);
 
 // Check the load result.
 if (loadResult == 1) {
-    // File doesn't exist, insert default cards and save.
+    // No textfile exists yet, insert default startcards and save.
     printf("\nNo existing card list found. Initializing with default cards...\n");
     insertStartCards(cardList);
     listCardToFile(cardList, "cardlist.txt");
 } else if (loadResult == 2) {
+    // cardfile.txt exists. Load it and read from it.
     printf("\nCard list found.\nCard list loaded successfully.\n");
 } else {
     // Error loading the file. Print an error message and exit the program.
@@ -52,6 +54,9 @@ int main (){
     // Main Menu-function.
     adminMenu(&cardList);
 
+
+    // After the user has quit the Admin Menu, save the textfile.
+    // Function in fileio.c.
     int saveResult = saveCardList("cardlist.txt", &cardList);
     
     if (saveResult == 2) {

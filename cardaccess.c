@@ -26,7 +26,7 @@ void cardAccess(CARDLIST *cardList) {
                cardList->list[index].accessGranted ? "Yes" : "No");
 
         // Ask for confirmation to modify access. 
-        // Adding a do-while to make sure, that the correct value (y/n) has been entered.
+        // Adding a do-while to make sure, that the correct value (yes/no) has been entered.
         char confirm[6];
         do {
             GetInput("\nShould access be granted? (yes/no): ", confirm, sizeof(confirm));
@@ -35,10 +35,11 @@ void cardAccess(CARDLIST *cardList) {
                 confirm[i] = tolower(confirm[i]);
             }
             if (strcmp(confirm, "yes") == 0) {
-                // Toggle the accessGranted value
+                // Toggle accessGranted to true.
                 cardList->list[index].accessGranted = true;
                 printf("\nAccess modified successfully.\nCard ID: %d\nAccess Granted: Yes\n", cardList->list[index].cardId);
             } else if (strcmp(confirm, "no") == 0) {
+                // Toggle accessGranted to false.
                 cardList->list[index].accessGranted = false;
                 printf("\nAccess modified successfully.\nCard ID: %d\nAccess Granted: No\n", cardList->list[index].cardId);
             } else {

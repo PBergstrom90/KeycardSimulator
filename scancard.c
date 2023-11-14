@@ -8,11 +8,13 @@
 // Using red/green-light and delay-function from remotedoor.c
 #include "remotedoor.h"
 
+// Function to test the accessGranted-value of different cards in the register.
 void scanCard(CARDLIST *cardList) {
     int cardId;
     GetInputInt("\nEnter the card ID-number: ", &cardId);
 
-    int index = -1;  // Default value indicating the card ID is not found
+    // Default value indicating the card ID is not found
+    int index = -1; 
     for (int i = 0; i < cardList->count; i++) {
         if (cardList->list[i].cardId == cardId) {
             index = i;  // Card ID found
@@ -24,7 +26,7 @@ void scanCard(CARDLIST *cardList) {
         // Card ID found
         printf("\nCard ID %d found.\n", cardId);
         if (cardList->list[index].accessGranted) {
-            // Access is granted, simulate a green lamp
+            // If access is granted, simulate a green lamp
             printf("Access: GRANTED.\n");
             printf("\nDoor is opening...\n");
             simulateGreenLamp();
@@ -39,13 +41,13 @@ void scanCard(CARDLIST *cardList) {
             printf("\nDoor is now locked.\n");
             simulateRedLamp();
         } else {
-            // Access is denied, simulate red lamp
+            // If access is denied, simulate red lamp
             printf("Access: DENIED.\n");
             printf("\nDoor is locked...\n");
             simulateRedLamp();
         }
     } else {
-        // Card ID not found
+        // Card ID not found. Door remains locked.
         printf("\nERROR: Card ID %d not found.\nAccess: DENIED.\n", cardId);
         printf("\nDoor is locked...\n");
         simulateRedLamp();
