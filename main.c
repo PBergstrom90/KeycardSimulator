@@ -23,21 +23,21 @@ void initializeCardList(CARDLIST *cardList) {
     cardList->list = NULL;
     cardList->count = 0;
     
-    // Load the card list from a file.
-    int loadResult = loadCardList("cardlist.txt", cardList);
+// In initializeCardList function
+int loadResult = loadCardList("cardlist.txt", cardList);
 
-    // Check the load result.
-    if (loadResult == 1) {
-        // File doesn't exist, insert default cards and save.
-        printf("\nNo existing card list found. Initializing with default cards...\n");
-        // From listcard.c
-        insertStartCards(cardList);
-    } else if (loadResult == 2){
-        printf("\nCard list found.\nCard list loaded successfully.\n");
-    } else {
-        // Error loading the file. Print an error message and exit the program.
-        fprintf(stderr, "ERROR: Cannot load the card list from file.\n");
-        exit(EXIT_FAILURE);
+// Check the load result.
+if (loadResult == 1) {
+    // File doesn't exist, insert default cards and save.
+    printf("\nNo existing card list found. Initializing with default cards...\n");
+    insertStartCards(cardList);
+    listCardToFile(cardList, "cardlist.txt");
+} else if (loadResult == 2) {
+    printf("\nCard list found.\nCard list loaded successfully.\n");
+} else {
+    // Error loading the file. Print an error message and exit the program.
+    fprintf(stderr, "ERROR: Cannot load the card list from file.\n");
+    exit(EXIT_FAILURE);
     }
 }
 

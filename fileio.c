@@ -16,7 +16,6 @@ int loadCardList(const char* filename, CARDLIST* cardList) {
     cardList->count = 0;
 
     char line[250];
-    char accessGrantedStr[50];
 
     // Read each line from the file
     while (fgets(line, sizeof(line), file) != NULL) {
@@ -26,24 +25,19 @@ int loadCardList(const char* filename, CARDLIST* cardList) {
             CARD card;
             // Read the next three lines for card ID, access granted, and timestamp
             if (fgets(line, sizeof(line), file) != NULL) {
-                // printf("Card ID line: %s", line);  // Debugging line
-                sscanf(line, "Card ID: %d", card.cardId);
+                sscanf(line, "Card ID: %d", &(card.cardId));  // Adjusted format specifier
             }
             if (fgets(line, sizeof(line), file) != NULL) {
-                // printf("Access Granted line: %s", line);  // Debugging line
-                sscanf(line, "Access Granted: %s", accessGrantedStr);
+                sscanf(line, "Access Granted: %s", line);
                 // Convert the accessGranted field to a boolean
-                card.accessGranted = (strcmp(accessGrantedStr, "Yes") == 0) ? true : false;
+                card.accessGranted = (strcmp(line, "Yes") == 0) ? true : false;
             }
             if (fgets(line, sizeof(line), file) != NULL) {
-                // printf("Timestamp line: %s", line);  // Debugging line
-                // Read the timestamp until the end of the line
-                sscanf(line, "Timestamp: %[^\n]", card.timeStamp);
+                sscanf(line, "Timestamp: %s", card.timeStamp);  // Adjusted format specifier
                 // Increment the card count and reallocate the list
                 cardList->list = realloc(cardList->list, (cardList->count + 1) * sizeof(CARD));
                 cardList->list[cardList->count] = card;
                 cardList->count++;
-                printf("--- END OF CARD ---\n");  // Debugging line
             }
         }
     }
