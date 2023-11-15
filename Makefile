@@ -1,6 +1,6 @@
 PROG = main.exe
 SRC = main.c safeinput.c adminmenu.c addcard.c cardaccess.c remotedoor.c listcard.c scancard.c fileio.c
-CFLAGS = -g
+CFLAGS = -g -Wall -Wextra -Wundef -pedantic -Werror
 LIBS = 
 all: $(PROG)
 

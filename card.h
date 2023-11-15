@@ -10,7 +10,6 @@ typedef struct {
     int cardId;
     bool accessGranted;
     char timeStamp[20];
-
 } CARD;
 
 #endif

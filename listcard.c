@@ -39,19 +39,9 @@ void insertStartCards(CARDLIST *cardList) {
     cardList->count = 2;
 }
 
-// The following 2 functions: "listCardToFile" & "printCardToString" are used to save cardinfo to cardlist.txt.
-
-void printCardToString(const CARD *card, char *output, size_t outputSize) {
-    // Check for NULL pointers or insufficient output buffer size
-    if (card == NULL || output == NULL || outputSize < 100) {
-        printf("ERROR: Invalid input or insufficient buffer size.\n");
-        return;
-    }
-    // Format the cardinfo to a string.
-    snprintf(output, outputSize,
-             "--- CARD NR %d ---\nCard ID: %d\nAccess Granted: %s\nTimestamp: %s\n",
-             card->cardId, card->accessGranted ? "Yes" : "No", card->timeStamp);
-}
+/*  This following function goes through all saved CARDs in the initiated CARDLIST. 
+    Calculates buffersize and then allocates memory for the CARD-string. 
+    Each CARD in the CARDLIST is then formated and printed to the file. */
 
 void listCardToFile(const CARDLIST *cardList, const char *filename) {
     FILE *file = fopen(filename, "w");
@@ -59,37 +49,42 @@ void listCardToFile(const CARDLIST *cardList, const char *filename) {
         perror("ERROR: Cannot open file for writing");
         return;
     }
-
-    // Print the header
+    // Print the header.
     fprintf(file, "--- CARD LIST ---\n");
-
-    // For every card in the list, use the PrintCardToString function.
+    // Iterate through each card in the cardList.
     for (int i = 0; i < cardList->count; i++) {
-        char cardString[100];
-        printCardToString(&(cardList->list[i]), cardString, sizeof(cardString));
+        char *cardString = NULL;
+        // Calculate the size needed for the string. The final + 1 is for null termination ('\0').
+        size_t bufferSize = snprintf(NULL, 0, "--- CARD NR %d ---\nCard ID: %d\nAccess Granted: %s\nTimestamp: %s\n",
+        i + 1, cardList->list[i].cardId, cardList->list[i].accessGranted ? "Yes" : "No", cardList->list[i].timeStamp) + 1;
+        // Allocate memory for the string.
+        cardString = malloc(bufferSize);
+        if (cardString == NULL) {
+            fprintf(stderr, "ERROR: Memory allocation failed.\n");
+            exit(EXIT_FAILURE);
+        }
+        // Format the string.
+        snprintf(cardString, bufferSize, "--- CARD NR %d ---\nCard ID: %d\nAccess Granted: %s\nTimestamp: %s\n",
+        i + 1, cardList->list[i].cardId, cardList->list[i].accessGranted ? "Yes" : "No", cardList->list[i].timeStamp);
+        // Write to the file.
         fprintf(file, "%s", cardString);
+        // Free the dynamically allocated memory.
+        free(cardString);
     }
-
-    // Print the total count
+    // Print the total count.
     fprintf(file, "\nTotal amount of cards in the system: %d\n", cardList->count);
-
     fclose(file);
 }
 
-// The following functions: printCard and listCard are used to present cards to the user in the console.
+// The following short functions: printCard and listCard, are used to present cards to the user in the console.
 
 void printCard (const CARD *card){
     if (card == NULL) {
         printf("ERROR: Invalid card pointer.\n");
         return;
     }
-    // As long as the timestamp info is not NULL, print Card.
-    if (card->timeStamp != NULL) {
     printf("Card ID: %d\nAccess Granted: %s\nTimestamp: %s\n",
     card->cardId, card->accessGranted ? "Yes" : "No", card->timeStamp);
-    } else {
-        printf("ERROR: Invalid timestamp pointer.\n");
-    }
 }
 
 void listCard(const CARDLIST *cardList) { 

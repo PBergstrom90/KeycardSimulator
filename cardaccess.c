@@ -22,7 +22,8 @@ void cardAccess(CARDLIST *cardList) {
     }
     if (index != -1) {
         // Card ID found, display current access status
-        printf("\nCard ID: %d\nAccess Granted: %s\n", cardList->list[index].cardId,
+        printf("\nCard ID found.\n");
+        printf("Card ID: %d\nAccess Granted: %s\n", cardList->list[index].cardId,
                cardList->list[index].accessGranted ? "Yes" : "No");
 
         // Ask for confirmation to modify access. 

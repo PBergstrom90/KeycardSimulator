@@ -36,7 +36,7 @@ void addCard(CARDLIST *cardList) {
     // Initiate a new Card struct.
     CARD newCard;
     // Initiate a bool, the confirm that the new card was added successfully at the end.
-    bool success;
+    bool success = true;
     // Initiate a bool to check if the input CardID already exists.
     bool idExists;
     do {
@@ -91,12 +91,12 @@ void addCard(CARDLIST *cardList) {
         break;
     }
 }
-    if(success = true){
+    if(success == true){
     // Report success to the user.
     printf("\nNew card added successfully.\n");
     printf("\nTotal amount of cards in the system: %d\n", cardList->count);
-    } else if (success = false){
-        printf("\nERROR: Cannot add new card . Please try again.\n");
+    } else if (success == false){
+        printf("\nERROR: Cannot add new card. Please try again.\n");
     }
     fclose(file);
 }

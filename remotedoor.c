@@ -5,7 +5,7 @@
 #include "safeinput.h"
 
     // Declaring a function for a timedelay, to let the door be open for 3 seconds.
-    void delay(unsigned int milliseconds) {
+    void delay(int milliseconds) {
     clock_t start_time = clock();
     while (clock() < start_time + milliseconds * CLOCKS_PER_SEC / 1000);
     }
