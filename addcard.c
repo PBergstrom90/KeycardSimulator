@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
 #include <stdbool.h>
 #include <malloc.h>
 #include <time.h>
@@ -42,7 +41,6 @@ void addCard(CARDLIST *cardList) {
     do {
         // Use the function to get 4 valid ID-digits.
         newCard.cardId = getValidCardId();
-
         // Loop through the cardlist, to check if the input matches an already existing cardid.
         idExists = false;
         for (int i = 0; i < cardList->count; i++) {
@@ -82,7 +80,6 @@ void addCard(CARDLIST *cardList) {
         return;
     }
     for (int i = 0; i < cardList->count; i++) {
-    // Write the CARD info to the cardList.
     size_t write_size = fwrite(&(cardList->list[i]), sizeof(CARD), 1, file);
     if (write_size != 1) {
         fprintf(stderr, "ERROR: Cannot write card to file.\n");

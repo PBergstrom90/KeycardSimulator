@@ -105,15 +105,12 @@ bool GetBooleanInput(const char* prompt) {
             // Handle error or "end of life".
             exit(EXIT_FAILURE);
         }
-
         // Remove newline character from input
         input[strcspn(input, "\n")] = '\0';
-
 		// Convert the input to lowercase
         for (int i = 0; input[i]; i++) {
             input[i] = tolower(input[i]);
         }
-
         if (strcmp(input, "yes") == 0) {
             return true;
         } else if (strcmp(input, "no") == 0) {

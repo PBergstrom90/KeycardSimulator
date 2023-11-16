@@ -10,9 +10,8 @@
 
 // Function to test the accessGranted-value of different cards in the register.
 void scanCard(CARDLIST *cardList) {
-    int cardId;
+    int cardId = 0000;
     GetInputInt("\nEnter the card ID-number: ", &cardId);
-
     // Default value indicating the card ID is not found
     int index = -1; 
     for (int i = 0; i < cardList->count; i++) {
@@ -21,7 +20,6 @@ void scanCard(CARDLIST *cardList) {
             break;
         }
     }
-
     if (index != -1) {
         // Card ID found
         printf("\nCard ID %d found.\n", cardId);
@@ -37,7 +35,6 @@ void scanCard(CARDLIST *cardList) {
             delay(1000);
             printf("1...\n");
             delay(1000);
-
             printf("\nDoor is now locked.\n");
             simulateRedLamp();
         } else {

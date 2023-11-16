@@ -12,16 +12,16 @@ void cardAccess(CARDLIST *cardList) {
     int cardId = 0;
     GetInputInt("\nEnter the card ID-number: ", &cardId);
 
-    // Search for the card ID in the list
-    int index = -1;  // Default value indicating the card ID is not found
+    // Search for the card ID in the list.
+    int index = -1;  // Default value indicating the card ID is not found.
     for (int i = 0; i < cardList->count; i++) {
         if (cardList->list[i].cardId == cardId) {
-            index = i;  // Card ID found
+            index = i;  // Card ID found.
             break;
         }
     }
     if (index != -1) {
-        // Card ID found, display current access status
+        // Card ID found, display current access status.
         printf("\nCard ID found.\n");
         printf("Card ID: %d\nAccess Granted: %s\n", cardList->list[index].cardId,
                cardList->list[index].accessGranted ? "Yes" : "No");

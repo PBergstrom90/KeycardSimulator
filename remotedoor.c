@@ -4,7 +4,7 @@
 #include "remotedoor.h"
 #include "safeinput.h"
 
-    // Declaring a function for a timedelay, to let the door be open for 3 seconds.
+    // Declaring a function for a timedelay, to delay the printf-statements in remoteDoor and scanCard.
     void delay(int milliseconds) {
     clock_t start_time = clock();
     while (clock() < start_time + milliseconds * CLOCKS_PER_SEC / 1000);
@@ -17,7 +17,6 @@
     printf("GREEN\n");
     printf("\033[0m");
 }
-
     // Red doorlight, when the door is locked.
     void simulateRedLamp() {
     printf("Currently the lamp is: ");
@@ -27,7 +26,6 @@
 }
     // Simple function to simulate a remote door operation.
     void remoteDoor() {
-        
         int openDoor = 0;
         printf("\nDo you wish to open the door? \n1. Yes\n2. No\n");
         GetInputInt("\nEnter: ", &openDoor);

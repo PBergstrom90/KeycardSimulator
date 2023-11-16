@@ -1,8 +1,5 @@
 #include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 #include <stdbool.h>
-#include <malloc.h>
 #include "safeinput.h"
 #include "card.h"
 #include "cardlist.h"

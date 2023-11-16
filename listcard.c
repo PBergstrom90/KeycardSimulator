@@ -14,7 +14,7 @@
 
 void insertStartCards(CARDLIST *cardList) {
     
-    // Initializing 2 default cards, presented the briefing of the project.
+    // Initializing 2 default cards, presented during the briefing of the project.
     time_t current_time;
     struct tm* time_info;
     time(&current_time);
@@ -39,43 +39,6 @@ void insertStartCards(CARDLIST *cardList) {
     cardList->count = 2;
 }
 
-/*  This following function goes through all saved CARDs in the initiated CARDLIST. 
-    Calculates buffersize and then allocates memory for the CARD-string. 
-    Each CARD in the CARDLIST is then formated and printed to the file. */
-
-void listCardToFile(const CARDLIST *cardList, const char *filename) {
-    FILE *file = fopen(filename, "w");
-    if (file == NULL) {
-        perror("ERROR: Cannot open file for writing");
-        return;
-    }
-    // Print the header.
-    fprintf(file, "--- CARD LIST ---\n");
-    // Iterate through each card in the cardList.
-    for (int i = 0; i < cardList->count; i++) {
-        char *cardString = NULL;
-        // Calculate the size needed for the string. The final + 1 is for null termination ('\0').
-        size_t bufferSize = snprintf(NULL, 0, "--- CARD NR %d ---\nCard ID: %d\nAccess Granted: %s\nTimestamp: %s\n",
-        i + 1, cardList->list[i].cardId, cardList->list[i].accessGranted ? "Yes" : "No", cardList->list[i].timeStamp) + 1;
-        // Allocate memory for the string.
-        cardString = malloc(bufferSize);
-        if (cardString == NULL) {
-            fprintf(stderr, "ERROR: Memory allocation failed.\n");
-            exit(EXIT_FAILURE);
-        }
-        // Format the string.
-        snprintf(cardString, bufferSize, "--- CARD NR %d ---\nCard ID: %d\nAccess Granted: %s\nTimestamp: %s\n",
-        i + 1, cardList->list[i].cardId, cardList->list[i].accessGranted ? "Yes" : "No", cardList->list[i].timeStamp);
-        // Write to the file.
-        fprintf(file, "%s", cardString);
-        // Free the dynamically allocated memory.
-        free(cardString);
-    }
-    // Print the total count.
-    fprintf(file, "\nTotal amount of cards in the system: %d\n", cardList->count);
-    fclose(file);
-}
-
 // The following short functions: printCard and listCard, are used to present cards to the user in the console.
 
 void printCard (const CARD *card){
@@ -89,7 +52,6 @@ void printCard (const CARD *card){
 
 void listCard(const CARDLIST *cardList) { 
 
-// For every card in the list, use the PrintCard-function.
 for (int i = 0; i < cardList->count;i++){
      printf("\t\n--- CARD NR %d --- \n", i+1);
      printCard(&(cardList->list[i]));
