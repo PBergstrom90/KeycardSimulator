@@ -19,6 +19,8 @@ void initializeCardList(CARDLIST *cardList);
 
 int main (){   
 
+    printf("\n\t--- KEYCARD READER ---\n");
+
     // Initialize a list for saving and presenting, all saved keycards.
     CARDLIST cardList;
 

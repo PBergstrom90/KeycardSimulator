@@ -15,7 +15,7 @@ void adminMenu(CARDLIST *cardList) {
     bool isRunning = true;
     while(isRunning){
     printf("\n\t--- ADMIN MENU ---\n");
-    printf("1. Remote Door Access.\n");
+    printf("\n1. Remote Door Access.\n");
     printf("2. List All Cards In System\n");
     printf("3. Add New Card\n");
     printf("4. Add/Remove Card Access\n");
