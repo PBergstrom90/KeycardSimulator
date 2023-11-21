@@ -7,7 +7,7 @@
 
 // Added function definition at the top, to resolve warnings in the initializeCardList-function.
 void insertStartCards(CARDLIST *cardList);
-void listCardToFile(const CARDLIST *cardList, const char *filename);
+void writeCardToFile(const CARDLIST *cardList, const char *filename);
 
 
 
@@ -28,7 +28,7 @@ if (loadResult == 0) {
     // No textfile exists yet, insert default startcards and save.
     printf("\nNo existing card list found. Initializing with default cards...\n");
     insertStartCards(cardList);
-    listCardToFile(cardList, "cardlist.txt");
+    writeCardToFile(cardList, "cardlist.txt");
 } else if (loadResult == 1) {
     // "cardfile.txt" exists. Load it and read from it.
     printf("\nCard list found.\nCard list loaded successfully.\n");
@@ -42,7 +42,7 @@ if (loadResult == 0) {
 /*  This following function goes through all saved CARDs in the initiated CARDLIST. 
     Calculates buffersize and then allocates memory for the CARD-string. 
     Each CARD in the CARDLIST is then formated and printed to the file. */
-void listCardToFile(const CARDLIST *cardList, const char *filename) {
+void writeCardToFile(const CARDLIST *cardList, const char *filename) {
     FILE *file = fopen(filename, "w");
     if (file == NULL) {
         perror("ERROR: Cannot open file for writing");

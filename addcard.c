@@ -23,7 +23,6 @@ int getValidCardId() {
 }
 
 void addCard(CARDLIST *cardList) {
-
     // Showing the current time, that will be implemented as a timestamp in the newCard.
     time_t current_time;
     struct tm* time_info;
