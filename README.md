@@ -41,8 +41,8 @@ This program simulates a basic keycard system where users can manage a list of k
 
 - `main.c`: Main program file.
 - `adminmenu.c`: Admin menu functions.
-- `card.c`: Keycard-related functions.
-- `cardlist.c`: Functions for managing the list of keycards.
+- `card.h`: Keycard-related struct.
+- `cardlist.h`: Struct for managing the list of keycards.
 - `fileio.c`: File I/O functions for saving and loading keycard data.
 - `listcard.c`: Functions for listing and printing card information.
 - `cardaccess.c`: Functions responsible for handling card access and modifying access permissions.
